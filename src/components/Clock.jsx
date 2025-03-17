@@ -3,7 +3,27 @@ import ClockFace from './ClockFace';
 import TimeFormatToggle from './TimeFormatToggle';
 
 const Clock = ({ city, timezone, customName }) => {
-  const [theme, setTheme] = useState('light');
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // 初始化时就计算正确的主题
+  const getInitialTheme = () => {
+    const now = new Date();
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const cityTime = new Date(utc + (3600000 * timezone));
+    const hours = cityTime.getHours();
+    return (hours >= 19 || hours < 6) ? 'dark' : 'light';
+  };
+
+  const [theme, setTheme] = useState(getInitialTheme());
+  
+  // 在组件挂载后添加延迟以显示过渡效果
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   const [time, setTime] = useState(new Date());
   const [is24Hour, setIs24Hour] = useState(
     localStorage.getItem(`timeFormat-${city}`) !== 'false'
@@ -64,8 +84,10 @@ const Clock = ({ city, timezone, customName }) => {
 
   return (
     <div className={`flex flex-col items-center justify-center p-6 rounded-3xl m-4
-      ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black'} 
-      shadow-lg transition-all duration-300`}>
+      ${isLoading ? (theme === 'dark' ? 'bg-white text-black' : 'bg-gray-900 text-white') : 
+        (theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black')
+      } 
+      shadow-lg transition-all duration-1000`}>
       
       {/* 城市名称 - 可编辑 */}
       <div className="mb-4 text-center">
