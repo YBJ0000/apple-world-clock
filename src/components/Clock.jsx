@@ -53,7 +53,7 @@ const Clock = ({ city, timezone, customName }) => {
   // 根据时区时间自动设置主题
   useEffect(() => {
     const hours = timezoneTime.getHours();
-    const isDarkTime = hours >= 19 || hours < 6; // 晚上7点到早上6点使用深色主题
+    const isDarkTime = hours >= 18 || hours < 6; // 晚上6点到早上6点使用深色主题
     setTheme(isDarkTime ? 'dark' : 'light');
   }, [timezoneTime]);
 
