@@ -4,6 +4,7 @@ import GlobalTimeFormatToggle from './components/GlobalTimeFormatToggle';
 import './index.css';
 
 function App() {
+  const [globalTheme, setGlobalTheme] = useState('light');
   const clocks = [
     { id: 1, city: 'Beijing', timezone: 8 },
     { id: 2, city: 'New York', timezone: -4 },
@@ -11,18 +12,33 @@ function App() {
     { id: 4, city: 'Sydney', timezone: 11 },
   ];
 
-  // 处理全局时间格式变化
   const handleGlobalTimeFormatChange = (newFormat) => {
-    // 强制重新渲染所有时钟
     window.location.reload();
+  };
+
+  const toggleGlobalTheme = () => {
+    setGlobalTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
   
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 flex flex-col justify-center">
+    <div className={`min-h-screen transition-colors duration-300 flex flex-col justify-center
+      ${globalTheme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8 text-black dark:text-white">
-          World Clock
-        </h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className={`text-3xl font-bold text-center flex-1
+            ${globalTheme === 'dark' ? 'text-white' : 'text-black'}`}>
+            World Clock
+          </h1>
+          <button
+            onClick={toggleGlobalTheme}
+            className={`px-4 py-2 rounded-full transition-colors duration-300
+              ${globalTheme === 'dark' 
+                ? 'bg-gray-700 text-white hover:bg-gray-600' 
+                : 'bg-gray-200 text-black hover:bg-gray-300'}`}
+          >
+            {globalTheme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+          </button>
+        </div>
         
         <div className="flex justify-center mb-4">
           <GlobalTimeFormatToggle 
