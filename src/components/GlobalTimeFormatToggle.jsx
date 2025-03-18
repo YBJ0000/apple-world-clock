@@ -21,7 +21,7 @@ const GlobalTimeFormatToggle = ({ cities, onToggle }) => {
   return (
     <button
       onClick={toggleGlobalTimeFormat}
-      className="px-4 py-2 rounded-full bg-orange-500 text-white hover:bg-orange-600 transition-colors duration-300 mb-4"
+      className="px-4 py-2 rounded-full bg-orange-500 text-white hover:bg-orange-600 transition-colors duration-300 mb-0"
     >
       Global {isGlobal24Hour ? '12-Hour' : '24-Hour'}
     </button>
