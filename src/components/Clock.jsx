@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ClockFace from './ClockFace';
 import TimeFormatToggle from './TimeFormatToggle';
 import WeatherInfo from './WeatherInfo';
+import { handleClockFaceClick } from '../utils/clockUtils';
 
 const Clock = ({ city, timezone, customName }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -101,8 +102,7 @@ const Clock = ({ city, timezone, customName }) => {
         ${isLoading ? (theme === 'dark' ? 'bg-white text-black' : 'bg-gray-900 text-white') : 
           (theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black')
         } 
-        shadow-lg transition-all duration-1000 relative cursor-pointer`}
-      onClick={handleClockClick}
+        shadow-lg transition-all duration-1000 relative`}
     >
       
       {/* 城市名称 - 可编辑 */}
@@ -123,6 +123,7 @@ const Clock = ({ city, timezone, customName }) => {
         minuteDeg={minuteDegrees}
         secondDeg={secondDegrees}
         theme={theme}
+        onClockFaceClick={(e) => handleClockFaceClick(e, setShowWeather, setWeatherPosition, showWeather)}
       />
       
       {/* 数字时间显示 */}
