@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ClockFace from './ClockFace';
 import TimeFormatToggle from './TimeFormatToggle';
+import WeatherInfo from './WeatherInfo';
 
 const Clock = ({ city, timezone, customName }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,6 +32,8 @@ const Clock = ({ city, timezone, customName }) => {
   const [displayName, setDisplayName] = useState(
     customName || localStorage.getItem(`city-${city}`) || city
   );
+  const [showWeather, setShowWeather] = useState(false);
+  const [weatherPosition, setWeatherPosition] = useState({ x: 0, y: 0 });
   
   // 更新时间
   useEffect(() => {
@@ -82,12 +85,25 @@ const Clock = ({ city, timezone, customName }) => {
     setIs24Hour(newFormat);
   };
 
+  const handleClockClick = (e) => {
+    e.stopPropagation(); // 防止事件冒泡
+    const rect = e.currentTarget.getBoundingClientRect();
+    setWeatherPosition({
+      x: rect.left + window.scrollX,
+      y: rect.top + window.scrollY
+    });
+    setShowWeather(!showWeather);
+  };
+
   return (
-    <div className={`flex flex-col items-center justify-center p-6 rounded-3xl m-4
-      ${isLoading ? (theme === 'dark' ? 'bg-white text-black' : 'bg-gray-900 text-white') : 
-        (theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black')
-      } 
-      shadow-lg transition-all duration-1000`}>
+    <div 
+      className={`flex flex-col items-center justify-center p-6 rounded-3xl m-4
+        ${isLoading ? (theme === 'dark' ? 'bg-white text-black' : 'bg-gray-900 text-white') : 
+          (theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black')
+        } 
+        shadow-lg transition-all duration-1000 relative cursor-pointer`}
+      onClick={handleClockClick}
+    >
       
       {/* 城市名称 - 可编辑 */}
       <div className="mb-4 text-center">
@@ -121,6 +137,13 @@ const Clock = ({ city, timezone, customName }) => {
       <TimeFormatToggle 
         cityId={city} 
         onChange={handleTimeFormatChange}
+        theme={theme}
+      />
+      
+      <WeatherInfo 
+        city={city}
+        visible={showWeather}
+        position={weatherPosition}
         theme={theme}
       />
     </div>
