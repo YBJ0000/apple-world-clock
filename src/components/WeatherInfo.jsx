@@ -5,7 +5,7 @@ const WeatherInfo = ({ city, visible, position, theme }) => {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+  const API_KEY = import.meta.env.WEATHER_API_KEY;
 
   useEffect(() => {
     if (visible && city) {
