@@ -41,15 +41,16 @@ const WeatherInfo = ({ city, visible, position, theme }) => {
 
   return (
     <div 
-      className={`fixed transform -translate-x-1/2
+      className={`fixed
         backdrop-blur-xl bg-opacity-80
         ${theme === 'dark' ? 'bg-gray-800/80' : 'bg-white/80'} 
         ${theme === 'dark' ? 'text-white' : 'text-gray-800'}
         shadow-lg rounded-3xl p-4 z-50 min-w-[180px]
         border ${theme === 'dark' ? 'border-gray-700/50' : 'border-gray-200/50'}`}
       style={{
-        left: `${position.x}px`,
-        top: `${position.y + 20}px`
+        left: `${position.x + 190}px`, // 让天气组件右移不挡住表盘，避免点击后立马闪退
+        top: `${position.y}px`,
+        transform: 'translateY(-50%)'
       }}
     >
       <div className="space-y-2 min-h-[100px] flex flex-col justify-center">
