@@ -7,16 +7,19 @@ const ClockFace = ({
   minuteDeg = 0, 
   secondDeg = 0,
   theme = 'light',
-  onClockFaceClick
+  onClockFaceClick,
+  onClockFaceLeave
 }) => {
   const hourMarks = Array.from({ length: 12 }, (_, i) => i);
   const radius = 86; // 减小半径，确保刻度在表盘内
   
   return (
-    <div className={`relative w-48 h-48 rounded-full flex items-center justify-center
-      ${theme === 'dark' ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} 
-      border-4 shadow-lg overflow-hidden cursor-pointer`}
+    <div 
+      className={`relative w-48 h-48 rounded-full flex items-center justify-center
+        ${theme === 'dark' ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'} 
+        border-4 shadow-lg overflow-hidden cursor-pointer`}
       onClick={onClockFaceClick}
+      onMouseLeave={onClockFaceLeave}
     > {/* 添加 overflow-hidden 防止溢出 */}
       
       {/* 时钟刻度 */}

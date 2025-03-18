@@ -7,3 +7,7 @@ export const handleClockFaceClick = (e, setShowWeather, setWeatherPosition, show
   });
   setShowWeather(!showWeather);
 };
+
+export const handleClockFaceLeave = (setShowWeather) => {
+  setShowWeather(false);
+};

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ClockFace from './ClockFace';
 import TimeFormatToggle from './TimeFormatToggle';
 import WeatherInfo from './WeatherInfo';
-import { handleClockFaceClick } from '../utils/clockUtils';
+import { handleClockFaceClick, handleClockFaceLeave } from '../utils/clockUtils';
 
 const Clock = ({ city, timezone, customName }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -124,6 +124,7 @@ const Clock = ({ city, timezone, customName }) => {
         secondDeg={secondDegrees}
         theme={theme}
         onClockFaceClick={(e) => handleClockFaceClick(e, setShowWeather, setWeatherPosition, showWeather)}
+        onClockFaceLeave={() => handleClockFaceLeave(setShowWeather)}
       />
       
       {/* 数字时间显示 */}
