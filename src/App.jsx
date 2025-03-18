@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Clock from './components/Clock';
 import GlobalTimeFormatToggle from './components/GlobalTimeFormatToggle';
 import './index.css';
@@ -7,6 +7,28 @@ function App() {
   const [globalTheme, setGlobalTheme] = useState(
     localStorage.getItem('globalTheme') || 'light'
   );
+
+  // 添加系统主题变化监听
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // 处理主题变化
+    const handleThemeChange = (e) => {
+      const newTheme = e.matches ? 'dark' : 'light';
+      setGlobalTheme(newTheme);
+      localStorage.setItem('globalTheme', newTheme);
+    };
+
+    // 添加监听器
+    mediaQuery.addEventListener('change', handleThemeChange);
+    
+    // 初始化时检查系统主题
+    handleThemeChange(mediaQuery);
+
+    // 清理监听器
+    return () => mediaQuery.removeEventListener('change', handleThemeChange);
+  }, []);
+
   const clocks = [
     { id: 1, city: 'Beijing', timezone: 8 },
     { id: 2, city: 'New York', timezone: -4 },
