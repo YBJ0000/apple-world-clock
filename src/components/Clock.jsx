@@ -13,7 +13,7 @@ const Clock = ({ city, timezone, customName }) => {
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
     const cityTime = new Date(utc + (3600000 * timezone));
     const hours = cityTime.getHours();
-    return (hours >= 19 || hours < 6) ? 'dark' : 'light';
+    return (hours >= 18 || hours < 6) ? 'dark' : 'light';
   };
 
   const [theme, setTheme] = useState(getInitialTheme());
