@@ -10,8 +10,8 @@ function App() {
   const clocks = [
     { id: 1, city: 'Beijing', timezone: 8 },
     { id: 2, city: 'New York', timezone: -4 },
-    { id: 3, city: 'London', timezone: 1 },
-    { id: 4, city: 'Sydney', timezone: 11 },
+    { id: 3, city: 'Sydney', timezone: 11 },
+    { id: 4, city: 'London', timezone: 1 },
   ];
 
   const handleGlobalTimeFormatChange = (newFormat) => {
