@@ -42,26 +42,40 @@ const WeatherInfo = ({ city, visible, position, theme }) => {
   return (
     <div 
       className={`fixed transform -translate-x-1/2
-        ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} 
-        ${theme === 'dark' ? 'text-white' : 'text-black'}
-        shadow-lg rounded-lg p-3 z-50 min-w-[200px] text-center`}
+        backdrop-blur-xl bg-opacity-80
+        ${theme === 'dark' ? 'bg-gray-800/80' : 'bg-white/80'} 
+        ${theme === 'dark' ? 'text-white' : 'text-gray-800'}
+        shadow-lg rounded-3xl p-4 z-50 min-w-[180px]
+        border ${theme === 'dark' ? 'border-gray-700/50' : 'border-gray-200/50'}`}
       style={{
         left: `${position.x}px`,
         top: `${position.y + 20}px`
       }}
     >
-      {loading && <div>Loading weather...</div>}
-      {error && <div className="text-red-500">Unable to load weather</div>}
-      {weather && !loading && !error && (
-        <div className="flex items-center justify-center gap-2">
-          <img 
-            src={`http://openweathermap.org/img/w/${weather.icon}.png`}
-            alt={weather.description}
-            className="w-8 h-8"
-          />
-          <span>{`${city}, ${weather.temp}°C, ${weather.description}`}</span>
-        </div>
-      )}
+      <div className="space-y-2 min-h-[100px] flex flex-col justify-center">
+        {loading && (
+          <div className="text-sm font-medium text-center">Loading weather...</div>
+        )}
+        {error && (
+          <div className="text-red-500 text-sm font-medium text-center">{error}</div>
+        )}
+        {weather && !loading && !error && (
+          <>
+            <div className="text-lg font-semibold">{city}</div>
+            <div className="flex items-center justify-between">
+              <span className="text-3xl font-light">{weather.temp}°</span>
+              <img 
+                src={`http://openweathermap.org/img/w/${weather.icon}.png`}
+                alt={weather.description}
+                className="w-12 h-12"
+              />
+            </div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              {weather.description}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
