@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const WeatherInfo = ({ city, visible, position, theme }) => {
   const [weather, setWeather] = useState(null);
@@ -10,14 +11,16 @@ const WeatherInfo = ({ city, visible, position, theme }) => {
     if (visible && city) {
       setLoading(true);
       setError(null);
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`)
+      
+      axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+        params: {
+          q: city,
+          units: 'metric',
+          appid: API_KEY
+        }
+      })
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Weather data not available');
-          }
-          return response.json();
-        })
-        .then(data => {
+          const data = response.data;
           setWeather({
             temp: Math.round(data.main.temp),
             description: data.weather[0].main,
@@ -25,7 +28,7 @@ const WeatherInfo = ({ city, visible, position, theme }) => {
           });
         })
         .catch(error => {
-          setError(error.message);
+          setError(error.response?.data?.message || 'Weather data not available');
           console.error('Error fetching weather:', error);
         })
         .finally(() => {
