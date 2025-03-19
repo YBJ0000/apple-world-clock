@@ -45,7 +45,7 @@ const WeatherInfo = ({ city, visible, position, theme }) => {
         backdrop-blur-xl bg-opacity-80
         ${theme === 'dark' ? 'bg-gray-800/80' : 'bg-white/80'} 
         ${theme === 'dark' ? 'text-white' : 'text-gray-800'}
-        shadow-lg rounded-3xl p-4 z-50 min-w-[180px]
+        shadow-lg rounded-3xl p-4 z-50 min-w-[150px]
         border ${theme === 'dark' ? 'border-gray-700/50' : 'border-gray-200/50'}`}
       style={{
         left: '68%', // 改为相对于时钟的右侧
