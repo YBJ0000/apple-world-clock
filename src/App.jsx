@@ -63,7 +63,17 @@ function App() {
                 ? 'bg-gray-700 text-white hover:bg-gray-600' 
                 : 'bg-gray-200 text-black hover:bg-gray-300'}`}
           >
-            {globalTheme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+            {globalTheme === 'dark' ? (
+              <>
+                <span className="text-lg">☀️</span>
+                <span className="hidden md:inline ml-1">Light</span>
+              </>
+            ) : (
+              <>
+                <span className="text-lg">🌙</span>
+                <span className="hidden md:inline ml-1">Dark</span>
+              </>
+            )}
           </button>
         </div>
         
