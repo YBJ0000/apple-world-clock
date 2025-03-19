@@ -102,7 +102,7 @@ const Clock = ({ city, timezone, customName }) => {
         ${isLoading ? (theme === 'dark' ? 'bg-white text-black' : 'bg-gray-900 text-white') : 
           (theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black')
         } 
-        shadow-lg transition-all duration-1000 relative`}
+        shadow-lg transition-all duration-1000 relative`} // 确保有 relative 定位
     >
       
       {/* 城市名称 - 可编辑 */}
