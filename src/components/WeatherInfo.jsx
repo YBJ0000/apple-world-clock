@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const WeatherInfo = ({ city, visible, position, theme }) => {
+const WeatherInfo = ({ city, visible, theme }) => {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

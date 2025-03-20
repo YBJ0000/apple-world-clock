@@ -36,7 +36,7 @@ function App() {
     { id: 4, city: 'London', timezone: 1 },
   ];
 
-  const handleGlobalTimeFormatChange = (newFormat) => {
+  const handleGlobalTimeFormatChange = () => {
     window.location.reload();
   };
 

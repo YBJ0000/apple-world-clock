@@ -86,16 +86,6 @@ const Clock = ({ city, timezone, customName }) => {
     setIs24Hour(newFormat);
   };
 
-  const handleClockClick = (e) => {
-    e.stopPropagation(); // 防止事件冒泡
-    const rect = e.currentTarget.getBoundingClientRect();
-    setWeatherPosition({
-      x: rect.left + window.scrollX,
-      y: rect.top + window.scrollY
-    });
-    setShowWeather(!showWeather);
-  };
-
   return (
     <div 
       className={`flex flex-col items-center justify-center p-6 rounded-3xl m-4
