@@ -1,3 +1,7 @@
-# World Clock
+#### 🌍⏰🌤️ [World Clock](https://world-clock-ybj.vercel.app/)
 
-A world clock app featuring dynamic theming, real-time updates, and responsive design.
+A modern clock app with dynamic theming and weather.  
+Tech: React, Tailwind, OpenWeather API  
+
+- Theme switches automatically by local time
+- Real-time weather and multi-timezone support
